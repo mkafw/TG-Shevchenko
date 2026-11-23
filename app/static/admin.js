@@ -54,7 +54,7 @@ function setupTelegram() {
 }
 
 async function loadDashboard() {
-  setNotice(tg?.initData ? "" : "Telegram initData пустой. Нажми /start и открой dashboard через inline-кнопку под сообщением бота.");
+  setNotice(tg?.initData ? "" : "Telegram initData 为空。请向机器人发送 /start 并点击管理后台按钮打开面板。");
   els.refreshDashboard.disabled = true;
   try {
     state.summary = await api("/admin/api/summary");
@@ -92,11 +92,11 @@ function renderProgress(rows) {
   renderList(els.progressList, rows, (row) => {
     const item = createRow();
     item.append(
-      createMain(`${userName(row)} читает ${cleanTitle(row.book_title)}`, `${row.current_page}/${row.total_chunks}`),
+      createMain(`${userName(row)} 正在阅读 ${cleanTitle(row.book_title)}`, `${row.current_page}/${row.total_chunks}`),
       createMeta([
         `TG ${row.telegram_id}`,
-        row.book_author ? `Автор: ${row.book_author}` : "",
-        row.last_opened_at ? `Открыто: ${formatDate(row.last_opened_at)}` : "",
+        row.book_author ? `作者: ${row.book_author}` : "",
+        row.last_opened_at ? `上次打开: ${formatDate(row.last_opened_at)}` : "",
       ]),
       createProgress(row.progress_percent),
     );
@@ -112,20 +112,20 @@ function renderBooks(rows) {
     const rechunkButton = document.createElement("button");
     rechunkButton.className = "small-action-button";
     rechunkButton.type = "button";
-    rechunkButton.textContent = "Rechunk";
+    rechunkButton.textContent = "重新分段";
     rechunkButton.addEventListener("click", () => rechunkBook(row, rechunkButton));
     actions.append(rechunkButton);
     item.append(
       createMain(cleanTitle(row.title), row.source_type.toUpperCase()),
       createMeta([
-        `Добавил: ${userName({
+        `上传者: ${userName({
           display_name: row.owner_display_name,
           username: row.owner_username,
           telegram_id: row.owner_telegram_id,
         })}`,
         `TG ${row.owner_telegram_id}`,
-        `${row.total_chunks} фрагм.`,
-        `${row.total_words} слов`,
+        `${row.total_chunks} 个分段`,
+        `${row.total_words} 字`,
         formatDate(row.uploaded_at),
       ]),
       actions,
@@ -139,8 +139,8 @@ function renderUsers(rows) {
     const item = createRow();
     item.append(
       createMain(userName(row), `ID ${row.id}`),
-      createMeta([`TG ${row.telegram_id}`, row.username ? `@${row.username}` : "", `Создан: ${formatDate(row.created_at)}`]),
-      createStats([`${row.books_added} книг`, `${row.welcome_bonuses_used} Welcome Bonus`]),
+      createMeta([`TG ${row.telegram_id}`, row.username ? `@${row.username}` : "", `注册时间: ${formatDate(row.created_at)}`]),
+      createStats([`${row.books_added} 本书`, `${row.welcome_bonuses_used} 次前情提要`]),
     );
     return item;
   });
@@ -151,7 +151,7 @@ function renderList(container, rows, renderRow) {
   if (!rows.length) {
     const empty = document.createElement("div");
     empty.className = "empty-state";
-    empty.textContent = "Пока пусто";
+    empty.textContent = "暂无数据";
     container.append(empty);
     return;
   }
@@ -212,17 +212,17 @@ function createProgress(percent) {
 async function sendMessage() {
   const text = els.messageText.value.trim();
   if (!text) {
-    setMessageResult("Сообщение пустое.");
+    setMessageResult("消息内容不能为空。");
     return;
   }
 
   const audience = els.messageAudience.value === "all" ? "all" : "user";
   const userId = Number(els.messageUser.value);
-  const targetLabel = audience === "all" ? "всем пользователям" : selectedUserLabel();
-  if (!window.confirm(`Отправить сообщение ${targetLabel}?`)) return;
+  const targetLabel = audience === "all" ? "所有用户" : selectedUserLabel();
+  if (!window.confirm(`确定要向 ${targetLabel} 发送消息吗？`)) return;
 
   els.sendMessage.disabled = true;
-  setMessageResult("Отправляю...");
+  setMessageResult("正在发送...");
   try {
     const result = await api("/admin/api/messages", {
       method: "POST",
@@ -244,31 +244,31 @@ async function sendMessage() {
 
 async function rechunkBook(row, button) {
   const title = cleanTitle(row.title);
-  if (!window.confirm(`Пересобрать фрагменты книги “${title}”? Прогресс пользователей будет перенесён по позиции в тексте.`)) {
+  if (!window.confirm(`确定重新分段书籍《${title}》吗？读者的阅读进度将根据在文本中的字数位置自动顺延。`)) {
     return;
   }
 
   button.disabled = true;
-  button.textContent = "Собираю...";
+  button.textContent = "分段中...";
   setNotice("");
   try {
     const result = await api(`/admin/api/books/${row.id}/rechunk`, { method: "POST" });
     setMessageResult(
-      `Rechunk готов: “${title}” было ${result.old_total_chunks}, стало ${result.new_total_chunks} фрагм.; прогрессов обновлено ${result.progress_rows_updated}.`,
+      `分段完成：《${title}》原为 ${result.old_total_chunks} 段，现为 ${result.new_total_chunks} 段；已同步 ${result.progress_rows_updated} 位读者的阅读进度。`,
     );
     await loadDashboard();
   } catch (error) {
     setNotice(error.message);
   } finally {
     button.disabled = false;
-    button.textContent = "Rechunk";
+    button.textContent = "重新分段";
   }
 }
 
 function formatMessageResult(result) {
   const failures = result.results.filter((item) => !item.ok);
-  if (!failures.length) return `Отправлено: ${result.sent}. Ошибок нет.`;
-  return `Отправлено: ${result.sent}. Ошибок: ${result.failed}. ${failures
+  if (!failures.length) return `发送成功：${result.sent} 条，无错误。`;
+  return `发送完成：成功 ${result.sent} 条，失败 ${result.failed} 条。${failures
     .slice(0, 3)
     .map((item) => `${item.telegram_id}: ${item.error}`)
     .join(" | ")}`;
@@ -281,7 +281,7 @@ function syncMessageAudience() {
 
 function selectedUserLabel() {
   const option = els.messageUser.selectedOptions[0];
-  return option ? option.textContent : "выбранному пользователю";
+  return option ? option.textContent : "选中的用户";
 }
 
 function userName(user) {
@@ -289,16 +289,16 @@ function userName(user) {
 }
 
 function cleanTitle(title) {
-  return String(title || "Без названия").replace(/\.(txt|epub|fb2|zip)$/i, "");
+  return String(title || "未命名书籍").replace(/\.(txt|epub|fb2|zip)$/i, "");
 }
 
 function formatDate(value) {
   if (!value) return "";
   const date = new Date(value);
   if (Number.isNaN(date.getTime())) return "";
-  return new Intl.DateTimeFormat("ru", {
-    day: "2-digit",
+  return new Intl.DateTimeFormat("zh-CN", {
     month: "2-digit",
+    day: "2-digit",
     hour: "2-digit",
     minute: "2-digit",
   }).format(date);

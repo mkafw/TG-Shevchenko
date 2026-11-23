@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="ru">
+<html lang="zh-CN">
   <head>
     <meta charset="utf-8" />
     <meta
@@ -7,7 +7,7 @@
       content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, viewport-fit=cover"
     />
     <meta name="color-scheme" content="dark light" />
-    <title>Uncat Dashboard</title>
+    <title>TG 伴读 管理后台</title>
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
     <link rel="stylesheet" href="/admin/admin.css?v=admin-5" />
   </head>
@@ -15,29 +15,29 @@
     <main class="admin-shell">
       <header class="admin-header">
         <div>
-          <p class="eyebrow">ТГ Шевченко Admin</p>
-          <h1>Uncat Dashboard</h1>
+          <p class="eyebrow">TG 伴读 管理后台</p>
+          <h1>管理面板</h1>
         </div>
-        <button id="refreshDashboard" class="icon-button" title="Обновить" aria-label="Обновить">↻</button>
+        <button id="refreshDashboard" class="icon-button" title="刷新" aria-label="刷新">↻</button>
       </header>
 
       <section id="notice" class="notice hidden"></section>
 
-      <section class="metrics-grid" aria-label="Ключевые метрики">
+      <section class="metrics-grid" aria-label="关键指标">
         <article class="metric">
-          <span>Пользователи</span>
+          <span>总用户数</span>
           <strong id="totalUsers">0</strong>
         </article>
         <article class="metric">
-          <span>Книги</span>
+          <span>总书籍数</span>
           <strong id="totalBooks">0</strong>
         </article>
         <article class="metric">
-          <span>Welcome Bonus</span>
+          <span>前情提要数</span>
           <strong id="totalBonuses">0</strong>
         </article>
         <article class="metric">
-          <span>Прогресс</span>
+          <span>阅读进度数</span>
           <strong id="totalProgress">0</strong>
         </article>
       </section>
@@ -45,18 +45,18 @@
       <section class="panel message-panel">
         <div class="panel-heading">
           <div>
-            <p class="eyebrow">Bot broadcast</p>
-            <h2>Сообщение пользователям</h2>
+            <p class="eyebrow">群发通知</p>
+            <h2>向用户发送消息</h2>
           </div>
-          <select id="messageAudience" class="select-input" aria-label="Получатель">
-            <option value="user">Один пользователь</option>
-            <option value="all">Все пользователи</option>
+          <select id="messageAudience" class="select-input" aria-label="接收群体">
+            <option value="user">单个用户</option>
+            <option value="all">所有用户</option>
           </select>
         </div>
         <div class="message-controls">
-          <select id="messageUser" class="select-input" aria-label="Пользователь"></select>
-          <textarea id="messageText" class="text-area" maxlength="2000" placeholder="Текст сообщения от бота"></textarea>
-          <button id="sendMessage" class="primary-button">Отправить</button>
+          <select id="messageUser" class="select-input" aria-label="选择用户"></select>
+          <textarea id="messageText" class="text-area" maxlength="2000" placeholder="以机器人身份发送消息内容"></textarea>
+          <button id="sendMessage" class="primary-button">发送消息</button>
         </div>
         <div id="messageResult" class="message-result hidden"></div>
       </section>
@@ -64,8 +64,8 @@
       <section class="panel">
         <div class="panel-heading">
           <div>
-            <p class="eyebrow">Reading state</p>
-            <h2>Кто где читает</h2>
+            <p class="eyebrow">阅读动态</p>
+            <h2>用户阅读进度</h2>
           </div>
         </div>
         <div id="progressList" class="data-list"></div>
@@ -74,8 +74,8 @@
       <section class="panel">
         <div class="panel-heading">
           <div>
-            <p class="eyebrow">Uploads</p>
-            <h2>Кто что добавил</h2>
+            <p class="eyebrow">书籍上传</p>
+            <h2>书籍列表与上传动态</h2>
           </div>
         </div>
         <div id="booksList" class="data-list"></div>
@@ -84,8 +84,8 @@
       <section class="panel">
         <div class="panel-heading">
           <div>
-            <p class="eyebrow">Users</p>
-            <h2>Пользователи</h2>
+            <p class="eyebrow">用户管理</p>
+            <h2>用户列表</h2>
           </div>
         </div>
         <div id="usersList" class="data-list"></div>

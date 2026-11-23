@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="uk">
+<html lang="zh-CN">
   <head>
     <meta charset="utf-8" />
     <meta
@@ -7,7 +7,7 @@
       content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, viewport-fit=cover"
     />
     <meta name="color-scheme" content="dark light" />
-    <title>ТГ Шевченко</title>
+    <title>TG 伴读</title>
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
     <link rel="stylesheet" href="/styles.css?v=product-7" />
   </head>
@@ -15,22 +15,22 @@
     <div id="appLoading" class="app-loading" aria-live="polite">
       <div class="loading-card">
         <div class="loading-emoji" aria-hidden="true">📚</div>
-        <p class="soft-label">ТГ Шевченко</p>
-        <h2 data-i18n="loadingTitle">Збираю тихе місце для читання</h2>
+        <p class="soft-label">TG 伴读</p>
+        <h2 data-i18n="loadingTitle">正在为你准备安静的阅读角</h2>
         <div class="loading-lines">
-          <span class="loading-line" data-i18n="loadingLine1">Перевіряю книжки</span>
-          <span class="loading-line" data-i18n="loadingLine2">Згадую прогрес</span>
-          <span class="loading-line" data-i18n="loadingLine3">Готую мʼякий вхід</span>
+          <span class="loading-line" data-i18n="loadingLine1">正在检查书籍</span>
+          <span class="loading-line" data-i18n="loadingLine2">正在读取进度</span>
+          <span class="loading-line" data-i18n="loadingLine3">准备就绪</span>
         </div>
       </div>
     </div>
     <div class="app-shell">
       <header class="app-topbar">
         <div class="topbar-copy">
-          <p id="topEyebrow" class="top-eyebrow">ТГ Шевченко</p>
-          <h1 id="screenTitle">Додому</h1>
+          <p id="topEyebrow" class="top-eyebrow">TG 伴读</p>
+          <h1 id="screenTitle">首页</h1>
         </div>
-        <button id="refreshBooks" class="round-button" title="Оновити" aria-label="Оновити">↻</button>
+        <button id="refreshBooks" class="round-button" title="刷新" aria-label="刷新">↻</button>
       </header>
 
       <main id="appMain" class="app-main">
@@ -38,37 +38,37 @@
 
         <section class="screen active" data-screen="home">
           <div class="hero-card">
-            <p id="homeGreeting" class="soft-label">Ласкаво просимо</p>
-            <h2 data-i18n="homeHeroTitle">Повернімося до книжки без ривка</h2>
-            <p data-i18n="homeHeroBody">Один маленький фрагмент вже рахується доброю сесією.</p>
+            <p id="homeGreeting" class="soft-label">欢迎回来</p>
+            <h2 data-i18n="homeHeroTitle">轻松重返阅读，无需压力</h2>
+            <p data-i18n="homeHeroBody">哪怕只读一小段，也是一次很好的阅读。</p>
           </div>
 
           <article class="continue-card">
             <div>
-              <p class="soft-label" data-i18n="continueLabel">Продовжити читання</p>
-              <h3 id="continueTitle">Книжку ще не вибрано</h3>
-              <p id="continueMeta">Завантаж книжку або вибери її в бібліотеці.</p>
+              <p class="soft-label" data-i18n="continueLabel">继续阅读</p>
+              <h3 id="continueTitle">尚未选择书籍</h3>
+              <p id="continueMeta">请上传电子书，或在书库中选择一本。</p>
             </div>
             <div class="action-row">
-              <button id="continueReading" class="primary-button" data-i18n="continueButton">Читати</button>
-              <button id="quickSession" class="secondary-button" data-i18n="quickSessionButton">3 хвилини</button>
+              <button id="continueReading" class="primary-button" data-i18n="continueButton">阅读</button>
+              <button id="quickSession" class="secondary-button" data-i18n="quickSessionButton">3分钟</button>
             </div>
           </article>
 
           <article id="welcomePreviewCard" class="recap-card hidden">
-            <p class="soft-label" data-i18n="welcomeBonusLabel">Що було раніше</p>
+            <p class="soft-label" data-i18n="welcomeBonusLabel">前情提要</p>
             <div id="welcomePreviewLoader" class="recap-loader hidden" role="status" aria-live="polite">
               <span class="recap-spinner" aria-hidden="true"></span>
-              <span data-i18n="welcomeLoading">Генерую коротке нагадування...</span>
+              <span data-i18n="welcomeLoading">正在生成上下文回顾...</span>
               <span class="recap-loading-dots" aria-hidden="true"><i></i><i></i><i></i></span>
             </div>
-            <p id="welcomePreview" data-i18n="welcomeFallback">Тут буде коротке нагадування перед поверненням.</p>
+            <p id="welcomePreview" data-i18n="welcomeFallback">重返阅读前，这里将显示简短的上下文回顾。</p>
           </article>
 
           <section class="section-block">
             <div class="section-heading">
-              <h2 data-i18n="recentBooks">Нещодавні книжки</h2>
-              <button class="link-button" data-go-screen="library" data-i18n="allBooks">Усі</button>
+              <h2 data-i18n="recentBooks">最近阅读</h2>
+              <button class="link-button" data-go-screen="library" data-i18n="allBooks">全部</button>
             </div>
             <div id="recentBooks" class="horizontal-books"></div>
           </section>
@@ -77,31 +77,31 @@
         <section class="screen" data-screen="library">
           <section class="upload-card">
             <div>
-              <p class="soft-label" data-i18n="importLabel">Імпорт</p>
-              <h2 data-i18n="addBook">Додати книжку</h2>
-              <p data-i18n="importHint">TXT, EPUB, FB2 або .fb2.zip. PDF відкладемо на потім.</p>
+              <p class="soft-label" data-i18n="importLabel">导入</p>
+              <h2 data-i18n="addBook">添加书籍</h2>
+              <p data-i18n="importHint">支持 TXT、EPUB、FB2 或 .fb2.zip 格式。</p>
             </div>
             <label class="file-picker">
               <input id="bookFile" type="file" accept=".txt,.epub,.fb2,.zip" />
-              <span data-i18n="chooseFile">Вибрати файл</span>
+              <span data-i18n="chooseFile">选择文件</span>
             </label>
-            <input id="bookTitle" class="text-input" placeholder="Назва, якщо потрібно" />
+            <input id="bookTitle" class="text-input" placeholder="书名（可选）" />
             <div id="uploadStatus" class="upload-status hidden"></div>
             <div id="uploadProgress" class="upload-progress hidden" aria-live="polite">
               <div class="upload-progress-meta">
-                <span data-i18n="uploading">Завантаження</span>
+                <span data-i18n="uploading">上传中</span>
                 <strong id="uploadProgressValue">0%</strong>
               </div>
               <div class="upload-progress-track">
                 <span id="uploadProgressFill"></span>
               </div>
             </div>
-            <button id="uploadBook" class="primary-button" data-i18n="uploadButton">Завантажити</button>
+            <button id="uploadBook" class="primary-button" data-i18n="uploadButton">确认上传</button>
           </section>
 
           <section class="section-block">
             <div class="section-heading">
-              <h2 data-i18n="libraryTitle">Бібліотека</h2>
+              <h2 data-i18n="libraryTitle">我的书库</h2>
               <span id="bookCount" class="count-pill">0</span>
             </div>
             <div id="booksList" class="book-list"></div>
@@ -112,8 +112,8 @@
           <section class="reader-card">
             <div class="reader-header">
               <div>
-                <p class="soft-label" data-i18n="readerLabel">Книжка</p>
-                <h2 id="bookMeta">Вибери книжку</h2>
+                <p class="soft-label" data-i18n="readerLabel">当前书籍</p>
+                <h2 id="bookMeta">选择书籍</h2>
               </div>
               <span id="progressMeta" class="count-pill">0 / 0</span>
             </div>
@@ -122,30 +122,30 @@
             </div>
 
             <div class="reader-mode-entry">
-              <button id="classicReadModeButton" class="primary-button" data-i18n="classicReadMode">Класичне читання</button>
-              <span data-i18n="classicReadModeHint">Сторінки, розділи, примітки й спокійне читання</span>
+              <button id="classicReadModeButton" class="primary-button" data-i18n="classicReadMode">翻页阅读</button>
+              <span data-i18n="classicReadModeHint">标准模式：分页、章节、注释与沉浸阅读</span>
             </div>
 
             <div class="reader-search">
-              <input id="readerSearchInput" class="text-input" placeholder="Слово або номер фрагмента" />
-              <button id="readerSearchButton" class="secondary-button mini-button" data-i18n="searchButton">Знайти</button>
+              <input id="readerSearchInput" class="text-input" placeholder="搜索关键词或段落序号" />
+              <button id="readerSearchButton" class="secondary-button mini-button" data-i18n="searchButton">搜索</button>
               <div id="readerSearchResults" class="search-results hidden"></div>
             </div>
 
             <div class="reader-tools">
-              <button id="toggleWelcomeBonus" class="secondary-button mini-button" data-i18n="welcomeBonusLabel">Що було раніше</button>
-              <div class="depth-control" role="group" aria-label="Тип нагадування">
-                <button class="depth-button active" data-bonus-type="quick" data-i18n="bonusQuick">Швидко</button>
-                <button class="depth-button" data-bonus-type="fiction" data-i18n="bonusFiction">Сюжет</button>
-                <button class="depth-button" data-bonus-type="nonfiction" data-i18n="bonusNonfiction">Ідеї</button>
-                <button class="depth-button" data-bonus-type="characters" data-i18n="bonusCharacters">Персонажі</button>
+              <button id="toggleWelcomeBonus" class="secondary-button mini-button" data-i18n="welcomeBonusLabel">前情提要</button>
+              <div class="depth-control" role="group" aria-label="回顾类型">
+                <button class="depth-button active" data-bonus-type="quick" data-i18n="bonusQuick">速览</button>
+                <button class="depth-button" data-bonus-type="fiction" data-i18n="bonusFiction">情节</button>
+                <button class="depth-button" data-bonus-type="nonfiction" data-i18n="bonusNonfiction">要点</button>
+                <button class="depth-button" data-bonus-type="characters" data-i18n="bonusCharacters">人物</button>
               </div>
             </div>
             <div id="welcomeBonus" class="recap-card compact hidden">
-              <button id="closeWelcomeBonus" class="recap-close" aria-label="Закрити переказ">×</button>
+              <button id="closeWelcomeBonus" class="recap-close" aria-label="关闭回顾">×</button>
               <div id="welcomeBonusLoader" class="recap-loader hidden" role="status" aria-live="polite">
                 <span class="recap-spinner" aria-hidden="true"></span>
-                <span data-i18n="welcomeLoading">Генерую коротке нагадування...</span>
+                <span data-i18n="welcomeLoading">正在生成上下文回顾...</span>
                 <span class="recap-loading-dots" aria-hidden="true"><i></i><i></i><i></i></span>
               </div>
               <p id="welcomeBonusText"></p>
@@ -153,34 +153,34 @@
 
             <div class="quick-fragment-heading">
               <div>
-                <p class="soft-label" data-i18n="quickFragmentLabel">Короткий фрагмент</p>
-                <h3 data-i18n="quickFragmentTitle">Мʼякий режим</h3>
+                <p class="soft-label" data-i18n="quickFragmentLabel">碎片微读</p>
+                <h3 data-i18n="quickFragmentTitle">微阅读模式</h3>
               </div>
-              <span class="count-pill" data-i18n="quickFragmentPill">Без ривка</span>
+              <span class="count-pill" data-i18n="quickFragmentPill">无压力</span>
             </div>
 
             <article id="chunkText" class="chunk-text">
-              <button id="tapPreviousChunk" class="tap-zone tap-zone-left" aria-label="Попередній фрагмент"></button>
-              <button id="toggleReaderOverlay" class="tap-zone tap-zone-center" aria-label="Показати налаштування читання"></button>
-              <button id="tapNextChunk" class="tap-zone tap-zone-right" aria-label="Наступний фрагмент"></button>
-              <div id="chunkTextValue" class="reader-page-content" data-i18n="readerEmpty">Тут зʼявиться один невеликий абзац. Без гонитви, без тиску.</div>
+              <button id="tapPreviousChunk" class="tap-zone tap-zone-left" aria-label="上一段"></button>
+              <button id="toggleReaderOverlay" class="tap-zone tap-zone-center" aria-label="阅读设置"></button>
+              <button id="tapNextChunk" class="tap-zone tap-zone-right" aria-label="下一段"></button>
+              <div id="chunkTextValue" class="reader-page-content" data-i18n="readerEmpty">这里将显示简短的段落。无需赶进度，轻松阅读。</div>
             </article>
 
-            <div class="chunk-navigation" aria-label="Навігація фрагментами">
-              <button id="chunkPreviousButton" class="secondary-button" data-i18n="previousChunk">Попередній фрагмент</button>
-              <button id="chunkNextButton" class="secondary-button" data-i18n="nextQuickFragment">Ще фрагмент</button>
+            <div class="chunk-navigation" aria-label="段落导航">
+              <button id="chunkPreviousButton" class="secondary-button" data-i18n="previousChunk">上一段</button>
+              <button id="chunkNextButton" class="secondary-button" data-i18n="nextQuickFragment">下一段</button>
             </div>
           </section>
 
           <nav class="reader-actions">
-            <button id="exitFocusMode" class="secondary-button hidden" data-i18n="exitClassicReadMode">Вийти з читання</button>
-            <button id="saveStop" class="primary-button" data-i18n="saveAndExit">Зберегти й вийти</button>
+            <button id="exitFocusMode" class="secondary-button hidden" data-i18n="exitClassicReadMode">退出阅读</button>
+            <button id="saveStop" class="primary-button" data-i18n="saveAndExit">保存并退出</button>
           </nav>
 
           <div id="readerOverlay" class="reader-overlay hidden">
             <div class="reader-overlay-top">
-              <button id="overlayExit" class="reader-overlay-button" data-i18n="readerClose">Закрити</button>
-              <button id="overlaySave" class="reader-overlay-button primary" data-i18n="saveAndExit">Зберегти й вийти</button>
+              <button id="overlayExit" class="reader-overlay-button" data-i18n="readerClose">关闭</button>
+              <button id="overlaySave" class="reader-overlay-button primary" data-i18n="saveAndExit">保存并退出</button>
             </div>
             <div class="reader-overlay-bottom">
               <div class="reader-progress-mini">
@@ -188,11 +188,11 @@
                 <div class="reader-progress-mini-track"><span id="readerProgressMiniFill"></span></div>
               </div>
               <div class="reader-settings-strip">
-                <button id="readerFontDown" class="reader-icon-button" aria-label="Зменшити шрифт">A-</button>
-                <button id="readerFontUp" class="reader-icon-button" aria-label="Збільшити шрифт">A+</button>
-                <button id="readerThemeToggle" class="reader-icon-button wide" data-i18n="readerThemeDark">Темна</button>
-                <button id="readerModeToggle" class="reader-icon-button wide hidden" data-i18n="readerModePage">Сторінки</button>
-                <button id="readerZonesToggle" class="reader-icon-button wide" data-i18n="readerZones">Зони</button>
+                <button id="readerFontDown" class="reader-icon-button" aria-label="字号缩小">A-</button>
+                <button id="readerFontUp" class="reader-icon-button" aria-label="字号放大">A+</button>
+                <button id="readerThemeToggle" class="reader-icon-button wide" data-i18n="readerThemeDark">暗黑</button>
+                <button id="readerModeToggle" class="reader-icon-button wide hidden" data-i18n="readerModePage">翻页</button>
+                <button id="readerZonesToggle" class="reader-icon-button wide" data-i18n="readerZones">热区</button>
               </div>
             </div>
           </div>
@@ -201,25 +201,25 @@
         <section class="screen" data-screen="progress">
           <div class="stats-grid">
             <article class="stat-card">
-              <p class="soft-label" data-i18n="streakLabel">Мʼяка серія</p>
-              <strong id="streakValue">0 днів</strong>
-              <span data-i18n="streakHint">Повернення важливіше за ідеальну серію.</span>
-              <div id="weekStreak" class="week-streak" aria-label="Дні тижня"></div>
+              <p class="soft-label" data-i18n="streakLabel">连续阅读</p>
+              <strong id="streakValue">0 天</strong>
+              <span data-i18n="streakHint">重返阅读比维持完美打卡更重要。</span>
+              <div id="weekStreak" class="week-streak" aria-label="星期"></div>
             </article>
             <article class="stat-card">
-              <p class="soft-label" data-i18n="sessionsLabel">Сесії</p>
+              <p class="soft-label" data-i18n="sessionsLabel">阅读次数</p>
               <strong id="sessionsValue">0</strong>
-              <span data-i18n="sessionsHint">Короткі підходи теж рахуються.</span>
+              <span data-i18n="sessionsHint">哪怕只读几分钟也很棒。</span>
             </article>
             <article class="stat-card">
-              <p class="soft-label" data-i18n="chunksLabel">Фрагменти</p>
+              <p class="soft-label" data-i18n="chunksLabel">已读段落</p>
               <strong id="chunksValue">0</strong>
-              <span data-i18n="chunksHint">Малі кроки, менше тертя.</span>
+              <span data-i18n="chunksHint">小步前行，减轻心理负担。</span>
             </article>
           </div>
 
           <section class="section-block">
-            <h2 data-i18n="recentActivity">Нещодавня активність</h2>
+            <h2 data-i18n="recentActivity">最近动态</h2>
             <div id="activityList" class="activity-list"></div>
           </section>
         </section>
@@ -228,79 +228,79 @@
           <section class="settings-list">
             <article class="setting-row">
               <div>
-                <p class="soft-label" data-i18n="languageLabel">Мова</p>
-                <h3 data-i18n="languageTitle">Мова інтерфейсу</h3>
+                <p class="soft-label" data-i18n="languageLabel">语言</p>
+                <h3 data-i18n="languageTitle">界面语言</h3>
               </div>
-              <span class="count-pill">Українська</span>
+              <span class="count-pill">简体中文</span>
             </article>
             <article class="setting-row">
               <div>
-                <p class="soft-label" data-i18n="textSizeLabel">Розмір тексту</p>
-                <h3 data-i18n="comfortableText">Комфортний</h3>
+                <p class="soft-label" data-i18n="textSizeLabel">字体大小</p>
+                <h3 data-i18n="comfortableText">适中</h3>
               </div>
-              <span class="count-pill" data-i18n="soon">Скоро</span>
+              <span class="count-pill" data-i18n="soon">即将推出</span>
             </article>
             <article class="setting-row">
               <div>
-                <p class="soft-label" data-i18n="themeLabel">Тема</p>
-                <h3 data-i18n="themeAuto">Системна / Telegram</h3>
+                <p class="soft-label" data-i18n="themeLabel">主题</p>
+                <h3 data-i18n="themeAuto">跟随系统 / TG</h3>
               </div>
-              <span class="count-pill">Авто</span>
+              <span class="count-pill">自动</span>
             </article>
             <article class="setting-row">
               <div>
-                <p class="soft-label" data-i18n="chunkSizeLabel">Розмір фрагмента</p>
-                <h3 data-i18n="oneParagraph">Один абзац</h3>
+                <p class="soft-label" data-i18n="chunkSizeLabel">段落长度</p>
+                <h3 data-i18n="oneParagraph">单段式</h3>
               </div>
-              <span class="count-pill">Скоро</span>
+              <span class="count-pill">即将推出</span>
             </article>
             <article class="setting-row">
               <div>
-                <p class="soft-label" data-i18n="classicReadMode">Класичне читання</p>
-                <h3 data-i18n="focusHint">Мінімум відволікань</h3>
+                <p class="soft-label" data-i18n="classicReadMode">翻页阅读</p>
+                <h3 data-i18n="focusHint">少分心，更专注</h3>
               </div>
-              <span class="count-pill">Читання</span>
+              <span class="count-pill">阅读</span>
             </article>
             <article class="setting-row">
               <div>
-                <p class="soft-label" data-i18n="telegramUserLabel">Користувач Telegram</p>
-                <h3 id="telegramUserInfo">Локальний читач</h3>
+                <p class="soft-label" data-i18n="telegramUserLabel">TG 用户</p>
+                <h3 id="telegramUserInfo">本地读者</h3>
               </div>
             </article>
           </section>
         </section>
       </main>
 
-      <nav class="bottom-nav" aria-label="Головна навігація">
+      <nav class="bottom-nav" aria-label="主导航">
         <button class="nav-item active" data-screen-target="home">
           <span class="nav-icon" aria-hidden="true">
             <svg viewBox="0 0 24 24"><path d="M3.5 11.5 12 4l8.5 7.5"/><path d="M5.5 10.5V20h13v-9.5"/><path d="M9.5 20v-6h5v6"/></svg>
           </span>
-          <b data-i18n="navHome">Додому</b>
+          <b data-i18n="navHome">首页</b>
         </button>
         <button class="nav-item" data-screen-target="library">
           <span class="nav-icon" aria-hidden="true">
             <svg viewBox="0 0 24 24"><path d="M5 5.5h6a3 3 0 0 1 3 3V20a3 3 0 0 0-3-3H5z"/><path d="M19 5.5h-5a3 3 0 0 0-3 3"/><path d="M19 5.5V17h-5a3 3 0 0 0-3 3"/></svg>
           </span>
-          <b data-i18n="navLibrary">Бібліотека</b>
+          <b data-i18n="navLibrary">书库</b>
         </button>
         <button class="nav-item" data-screen-target="reader">
           <span class="nav-icon" aria-hidden="true">
             <svg viewBox="0 0 24 24"><path d="M7 4.5h10a2 2 0 0 1 2 2v13H7a2 2 0 0 1-2-2v-11a2 2 0 0 1 2-2z"/><path d="M8 8h8"/><path d="M8 11.5h7"/><path d="M8 15h5"/></svg>
           </span>
-          <b data-i18n="navReader">Читання</b>
+          <b data-i18n="navReader">阅读</b>
         </button>
         <button class="nav-item" data-screen-target="progress">
           <span class="nav-icon" aria-hidden="true">
             <svg viewBox="0 0 24 24"><path d="M5 19V9"/><path d="M12 19V5"/><path d="M19 19v-7"/><path d="M4 19h16"/></svg>
           </span>
-          <b data-i18n="navProgress">Прогрес</b>
+          <b data-i18n="navProgress">进度</b>
         </button>
         <button class="nav-item" data-screen-target="settings">
           <span class="nav-icon" aria-hidden="true">
             <svg viewBox="0 0 24 24"><path d="M12 8.5a3.5 3.5 0 1 1 0 7 3.5 3.5 0 0 1 0-7z"/><path d="M12 3.5v2"/><path d="M12 18.5v2"/><path d="M4.6 7.8l1.7 1"/><path d="M17.7 15.2l1.7 1"/><path d="M19.4 7.8l-1.7 1"/><path d="M6.3 15.2l-1.7 1"/></svg>
           </span>
-          <b data-i18n="navSettings">Налаштування</b>
+          <b data-i18n="navSettings">设置</b>
         </button>
       </nav>
     </div>
@@ -308,36 +308,36 @@
       <form id="editBookForm" method="dialog" class="edit-card">
         <div class="section-heading">
           <div>
-            <p class="soft-label" data-i18n="editBookTitle">Книжка</p>
-            <h2 id="editBookHeading">Редагувати</h2>
+            <p class="soft-label" data-i18n="editBookTitle">书籍信息</p>
+            <h2 id="editBookHeading">编辑书籍</h2>
           </div>
-          <button id="closeEditBook" class="round-button" type="button" aria-label="Закрити">×</button>
+          <button id="closeEditBook" class="round-button" type="button" aria-label="关闭">×</button>
         </div>
         <label class="edit-field">
-          <span data-i18n="editTitleLabel">Назва</span>
+          <span data-i18n="editTitleLabel">书名</span>
           <input id="editTitle" class="text-input" type="text" />
         </label>
         <label class="edit-field">
-          <span data-i18n="editAuthorLabel">Автор</span>
+          <span data-i18n="editAuthorLabel">作者</span>
           <input id="editAuthor" class="text-input" type="text" />
         </label>
         <label class="file-picker">
           <input id="editCover" type="file" accept="image/png,image/jpeg,image/webp,image/gif" />
-          <span data-i18n="editCoverLabel">Обкладинка</span>
+          <span data-i18n="editCoverLabel">封面</span>
         </label>
         <label class="toggle-row edit-remove-cover">
           <input id="editRemoveCover" type="checkbox" />
-          <span data-i18n="removeCover">Прибрати обкладинку</span>
+          <span data-i18n="removeCover">移除封面</span>
         </label>
         <div class="action-row">
-          <button id="cancelEditBook" class="secondary-button" type="button" data-i18n="cancel">Скасувати</button>
-          <button id="saveBookEdit" class="primary-button" type="submit" data-i18n="saveChanges">Зберегти</button>
+          <button id="cancelEditBook" class="secondary-button" type="button" data-i18n="cancel">取消</button>
+          <button id="saveBookEdit" class="primary-button" type="submit" data-i18n="saveChanges">保存</button>
         </div>
       </form>
     </dialog>
     <div id="streakToast" class="streak-toast hidden" aria-live="polite">
       <div class="streak-emoji-burst" aria-hidden="true"><span>🔥</span><span>✨</span><span>📖</span><span>🌟</span></div>
-      <strong id="streakToastText">День зараховано</strong>
+      <strong id="streakToastText">今日已打卡</strong>
     </div>
     <script src="/app.js?v=product-7"></script>
   </body>

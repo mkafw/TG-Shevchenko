@@ -17,7 +17,7 @@ def build_main_keyboard(is_admin: bool = False) -> InlineKeyboardMarkup:
     inline_keyboard = [
         [
             InlineKeyboardButton(
-                text="Магія ТГШ",
+                text="开启阅读 📖",
                 web_app=WebAppInfo(url=settings.telegram_webapp_url),
             )
         ]
@@ -26,7 +26,7 @@ def build_main_keyboard(is_admin: bool = False) -> InlineKeyboardMarkup:
         inline_keyboard.append(
             [
                 InlineKeyboardButton(
-                    text="Uncat dashboard",
+                    text="管理后台 🛠",
                     web_app=WebAppInfo(url=_admin_webapp_url()),
                 )
             ]
@@ -37,15 +37,15 @@ def build_main_keyboard(is_admin: bool = False) -> InlineKeyboardMarkup:
 
 async def handle_start(message: Message) -> None:
     is_admin = settings.is_admin_telegram_id(message.from_user.id if message.from_user else None)
-    await message.answer("Оновлюю кнопки Mini App.", reply_markup=ReplyKeyboardRemove())
+    await message.answer("正在刷新阅读器入口...", reply_markup=ReplyKeyboardRemove())
     await message.answer(
-        "Привіт. Я допоможу повернутися до книги маленькими спокіними сесіями.",
+        "你好！我来陪你用碎片时间轻松、无压力地阅读。",
         reply_markup=build_main_keyboard(is_admin=is_admin),
     )
 
 
 async def handle_web_app_data(message: Message) -> None:
-    await message.answer("Дані з Mini App отримано. Можна продовжувати читання.")
+    await message.answer("已同步阅读器进度，可以继续阅读。")
 
 
 def _admin_webapp_url() -> str:

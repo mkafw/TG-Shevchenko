@@ -138,31 +138,31 @@ def parse_json_payload(raw_text: str) -> dict[str, Any] | None:
 def build_welcome_bonus_prompt(request: WelcomeBonusRequest) -> str:
     schema = _schema_for_bonus_type(request.bonus_type)
     focus = _focus_for_bonus_type(request.bonus_type)
-    language_name = "українська" if request.ui_language == "uk" else request.ui_language
-    book_type = request.book_type or "невідомий"
-    summary = request.summary_so_far or "Немає."
+    language_name = "中文" if request.ui_language in ("zh", "zh-CN", "zh-hans") else ("українська" if request.ui_language == "uk" else request.ui_language)
+    book_type = request.book_type or "未知"
+    summary = request.summary_so_far or "无"
 
-    return f"""Ти генеруєш Welcome Bonus для Telegram Mini App читалки.
+    return f"""你正在为 Telegram 读书小程序生成 Welcome Bonus（前情提要回顾）。
 
-Завдання: допомогти користувачу м'яко повернутися до книжки після паузи. Не замінюй читання.
+核心任务：帮助读者在暂停后温和、无压力地重回书籍语境。不要替代读者的正常阅读。
 
-Тип Welcome Bonus: {request.bonus_type}
-Фокус цього типу: {focus}
+提要类型: {request.bonus_type}
+关注重心: {focus}
 
-Суворі правила:
-- Використовуй тільки наданий нижче текст.
-- Не вигадуй події, імена, мотиви, стосунки або пояснення.
-- Не розкривай і не передбачай нічого після поточної позиції читання.
-- Не продовжуй історію.
-- Не цитуй великі частини книжки.
-- Не підсумовуй всю книжку.
-- Не додавай зовнішні знання.
-- Якщо тексту недостатньо, чесно напиши, що можна пригадати тільки недавній контекст.
-- Тон: спокійний, теплий, корисний.
-- Мова відповіді: {language_name}; якщо є сумнів, відповідай українською.
-- Поверни тільки валідний JSON. Без Markdown, без пояснень, без тексту поза JSON.
+严格守则：
+- 仅依据下方提供的文本内容。
+- 绝不编造剧情、人名、动机、关系或过度脑补。
+- 严禁剧透当前阅读进度之后的任何内容。
+- 不要续写故事。
+- 不要大段引用原书。
+- 不要试图概括全书。
+- 不要引入外部背景知识。
+- 如果前文内容过少，坦诚说明即可。
+- 语气风格：温和、亲切、清晰、有帮助。
+- 回复语言：{language_name}。
+- 只返回标准合法的 JSON 数据，不要带有任何 Markdown 标记或多余解释。
 
-Книжка:
+书籍信息:
 - title: {request.book_title}
 - book_type: {book_type}
 - current_chunk_index: {request.current_chunk_index}
@@ -172,7 +172,7 @@ def build_welcome_bonus_prompt(request: WelcomeBonusRequest) -> str:
 JSON schema:
 {schema}
 
-Попередні фрагменти перед поточною позицією:
+当前阅读进度之前的正文片段:
 {request.previous_chunks_text}
 """
 
@@ -181,7 +181,7 @@ def normalize_bonus_payload(payload: dict[str, Any], bonus_type: WelcomeBonusTyp
     normalized = dict(payload)
     normalized["type"] = bonus_type
     normalized.setdefault("title", _default_title(bonus_type))
-    normalized.setdefault("continue_hint", "Можна спокійно продовжувати читання.")
+    normalized.setdefault("continue_hint", "可以继续阅读。")
 
     if bonus_type == "quick":
         normalized.setdefault("recap", "")
@@ -202,25 +202,22 @@ def normalize_bonus_payload(payload: dict[str, Any], bonus_type: WelcomeBonusTyp
 def raw_text_payload(bonus_type: WelcomeBonusType, raw_text: str) -> dict[str, Any]:
     recap = raw_text.strip()
     if looks_like_json_fragment(recap):
-        recap = "Не вдалося розібрати AI-нагадування. Можна спокійно повернутися до попереднього контексту."
+        recap = "未能解析 AI 提要，可直接继续阅读前文。"
     return {
         "type": bonus_type,
         "title": _default_title(bonus_type),
-        "recap": recap or "Не вдалося розібрати AI-нагадування.",
-        "continue_hint": "Можна спокійно продовжувати читання.",
+        "recap": recap or "未能解析 AI 提要。",
+        "continue_hint": "可以继续阅读。",
     }
 
 
 def fallback_bonus_payload(previous_text_preview: str) -> dict[str, Any]:
     return {
         "type": "fallback",
-        "title": "Коротке нагадування",
-        "recap": (
-            "Не вдалося згенерувати AI-нагадування. Ось кілька попередніх фрагментів, "
-            "щоб швидко згадати контекст."
-        ),
+        "title": "简要回顾",
+        "recap": "未能生成 AI 提要。以下为前几段内容，以便快速回忆语境。",
         "previous_text_preview": previous_text_preview,
-        "continue_hint": "Можна спокійно продовжувати читання.",
+        "continue_hint": "可以继续阅读。",
     }
 
 
@@ -240,7 +237,7 @@ def display_text_from_payload(payload: dict[str, Any]) -> str:
     preview = payload.get("previous_text_preview")
     if not parts and isinstance(preview, str):
         parts.append(preview.strip())
-    return "\n\n".join(parts).strip() or "Можна спокійно продовжувати читання."
+    return "\n\n".join(parts).strip() or "可以继续阅读。"
 
 
 def looks_like_json_fragment(text: str) -> bool:
@@ -252,11 +249,11 @@ def looks_like_json_fragment(text: str) -> bool:
 
 def _default_title(bonus_type: str) -> str:
     return {
-        "quick": "Що було раніше",
-        "fiction": "Що сталося раніше",
-        "nonfiction": "Що важливо пам'ятати",
-        "characters": "Хто є хто",
-    }.get(bonus_type, "Коротке нагадування")
+        "quick": "前情提要",
+        "fiction": "情节回顾",
+        "nonfiction": "重点速览",
+        "characters": "人物脉络",
+    }.get(bonus_type, "简要回顾")
 
 
 def _focus_for_bonus_type(bonus_type: WelcomeBonusType) -> str:
