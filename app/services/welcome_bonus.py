@@ -157,9 +157,9 @@ def _normalize_cached_bonus(db: Session, bonus: WelcomeBonus) -> WelcomeBonus:
     else:
         bonus.payload = {
             "type": bonus.bonus_type or "quick",
-            "title": "Що було раніше",
+            "title": "前情提要",
             "recap": bonus.text,
-            "continue_hint": "Можна спокійно продовжувати читання.",
+            "continue_hint": "可以继续阅读。",
         }
     db.commit()
     db.refresh(bonus)

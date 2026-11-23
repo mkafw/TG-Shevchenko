@@ -120,7 +120,7 @@ def clean_book_title(raw_title: str, filename: str) -> str:
         value = _strip_known_extensions(filename)
     if _is_latin_uppercase_noise(value):
         value = value.title()
-    return value or "Без названия"
+    return value or "未命名书籍"
 
 
 def _strip_known_extensions(value: str) -> str:

@@ -258,10 +258,10 @@ def _default_title(bonus_type: str) -> str:
 
 def _focus_for_bonus_type(bonus_type: WelcomeBonusType) -> str:
     return {
-        "quick": "загальне коротке нагадування у 3-5 реченнях",
-        "fiction": "недавні події, активна ситуація, персонажі і емоційний стан історії, якщо це видно з тексту",
-        "nonfiction": "ключові ідеї, аргументи, поняття і те, що варто пам'ятати перед продовженням",
-        "characters": "імена персонажів, хто вони і чому важливі зараз, тільки якщо це прямо видно з тексту",
+        "quick": "3-5句简明扼要的整体剧情回顾",
+        "fiction": "近期发生的事件、当前局势、出场人物及故事的情绪氛围（仅限文本已有内容）",
+        "nonfiction": "核心观点、关键论据、重要概念以及继续阅读前需要记住的要点",
+        "characters": "人物姓名、身份以及他们当前为何重要（仅限文本明确提及）",
     }[bonus_type]
 
 
@@ -269,38 +269,38 @@ def _schema_for_bonus_type(bonus_type: WelcomeBonusType) -> str:
     schemas = {
         "quick": {
             "type": "quick",
-            "title": "Що було раніше",
-            "recap": "3-5 коротких речень.",
-            "key_points": ["point 1", "point 2"],
-            "continue_hint": "Одне м'яке речення, що допомагає продовжити.",
+            "title": "前情提要",
+            "recap": "3-5句简短的剧情回顾。",
+            "key_points": ["核心要点 1", "核心要点 2"],
+            "continue_hint": "一句温和鼓励继续阅读的提示。",
         },
         "fiction": {
             "type": "fiction",
-            "title": "Що сталося раніше",
-            "recap": "3-5 речень переказу недавніх подій.",
-            "events": ["recent event 1", "recent event 2", "recent event 3"],
-            "characters": [{"name": "Character name", "context": "Why this character matters right now"}],
-            "continue_hint": "Одне м'яке речення для повернення в історію.",
+            "title": "情节回顾",
+            "recap": "3-5句近期故事发展的简要概括。",
+            "events": ["近期事件 1", "近期事件 2", "近期事件 3"],
+            "characters": [{"name": "人物姓名", "context": "该人物当前为何重要"}],
+            "continue_hint": "一句重返故事语境的温和提示。",
         },
         "nonfiction": {
             "type": "nonfiction",
-            "title": "Що важливо пам'ятати",
-            "main_idea": "Один короткий абзац з головною ідеєю.",
-            "key_points": ["key idea 1", "key idea 2", "key idea 3"],
-            "continue_hint": "Одне речення про те, від чого продовжується наступний розділ.",
+            "title": "重点速览",
+            "main_idea": "概括核心观点的一段简短说明。",
+            "key_points": ["关键观点 1", "关键论据 2", "核心概念 3"],
+            "continue_hint": "承上启下、引出后续章节的简要提示。",
         },
         "characters": {
             "type": "characters",
-            "title": "Хто є хто",
-            "recap": "Одне коротке речення про поточний контекст персонажів.",
+            "title": "人物脉络",
+            "recap": "关于当前出场人物语境的一句简短说明。",
             "characters": [
                 {
-                    "name": "Character name",
-                    "description": "Who this person is based only on the provided text.",
-                    "current_context": "Why they matter right now.",
+                    "name": "人物姓名",
+                    "description": "基于前文明确提及的人物身份与设定。",
+                    "current_context": "该人物当前在故事中的作用与重要性。",
                 }
             ],
-            "continue_hint": "Одне м'яке речення для повернення до читання.",
+            "continue_hint": "一句温和重回阅读的提示。",
         },
     }
     return json.dumps(schemas[bonus_type], ensure_ascii=False, indent=2)

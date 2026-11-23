@@ -246,7 +246,7 @@ def find_book_note(db: Session, user: User, book_id: int, marker: str) -> dict[s
 
     return {
         "marker": clean_marker,
-        "text": f"Сноска [{clean_marker}] есть в тексте, но объяснение не найдено в загруженных фрагментах книги.",
+        "text": f"正文中包含注释 [{clean_marker}]，但在已加载的分段中未找到对应解释。",
         "found": False,
         "chunk_index": None,
     }
